@@ -60,7 +60,7 @@ def listen():
 
             if 'Temperature' in split[1]:
                 tmp_data = split[1].split(' ');
-                if (len(tmp_data) == 2):
+                if (len(tmp_data) != 2):
                     continue
                 tmp = tmp_data[1]
             else:
