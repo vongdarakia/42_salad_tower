@@ -74,8 +74,36 @@ def about():
     return render_template('about.html')
 
 @app.route("/data")
-def data():
-    return render_template('data.html')
+def dataPi():
+    if ser:
+        while True:
+            read_serial = ser.readline()
+            print(read_serial)
+            read_serial = read_serial.strip()
+            split = read_serial.split(',');
+
+            if len(split) != 2:
+                continue
+
+            if 'Humidity' in split[0]:
+                hum_data = split[0].split(' ');
+                if (len(hum_data) != 2):
+                    continue
+                hum = hum_data[1]
+            else:
+                continue
+
+            if 'Temperature' in split[1]:
+                tmp_data = split[1].split(' ');
+                if (len(tmp_data) != 2):
+                    continue
+                tmp = tmp_data[1]
+            else:
+                continue
+
+            time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+            break
+    return jsonify(makeData(hum, tmp, time_taken))
 
 @app.route("/sensor_data")
 def getSensorData():
