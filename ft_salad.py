@@ -52,7 +52,6 @@ def listen():
                 else:
                     continue
             else:
-		print('no humidity')
                 continue
 
             if 'Temperature' in split[1]:
@@ -62,7 +61,6 @@ def listen():
                 else:
                     continue
             else:
-		print('no temp')
                 continue
 
             time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
@@ -130,12 +128,4 @@ if __name__ == "__main__":
     # print makeData(1, 1, 2, 2)
     # appendDataCSV(data_file, {'temperature': 1, 'temperature_time': 1, 'humidity': 2, 'humidity_time': 2});
         # print(data)
-    # with open('names.csv', 'rb') as csvfile:
-    #     fieldnames = ['first_name', 'last_name']
-    #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    #     writer.writeheader()
-    #     writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
-    #     writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
-    #     writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
     socketio.run(app, debug=False)
