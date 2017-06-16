@@ -55,23 +55,23 @@ void loop() {
   lcd.print((int)(DHT.temperature * 9.0/5.0 + 32.0));
   lcd.print("F");
   if (DHT.humidity >= 71 || DHT.humidity <= 49)
-   {
+  {
     analogWrite(red_pin, 255);
     analogWrite(green_pin, 0);
-   }
-   else
-   {
+  }
+  else
+  {
     analogWrite(red_pin, 0);
     analogWrite(green_pin, 255);
-   }
+  }
 //  delay(10000);
   Serial.print("Humidity: ");
   Serial.print(DHT.humidity);
-  Serial.print("\n");
 
   f = DHT.temperature * 9.0/5.0 + 32.0;
-  Serial.print("Temperature: ");
+  Serial.print(",Temperature: ");
   Serial.print(f);
-  Serial.print("\n\n");
-  delay(1000);
+  Serial.print("\n");
+
+  delay(2000);
 }
