@@ -84,13 +84,13 @@ def getSensorData():
     return jsonify(data[-43200:])
 
 def createDataCSV(filename):
-    with open(filename, 'w') as csvfile:
+    with open(filename, 'w+') as csvfile:
         fieldnames = ['temperature', 'humidity', 'time']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
 
 def appendDataCSV(filename, data):
-    with open(filename, 'a') as csvfile:
+    with open(filename, 'a+') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(data)
 
@@ -126,6 +126,7 @@ if __name__ == "__main__":
     if (row_count == 0):
         createDataCSV(data_file)
 
+    appendDataCSV(data_file, makeData(1, 1, 1));  
     # print makeData(1, 1, 2, 2)
     # appendDataCSV(data_file, {'temperature': 1, 'temperature_time': 1, 'humidity': 2, 'humidity_time': 2});
         # print(data)
