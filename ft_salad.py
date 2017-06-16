@@ -25,12 +25,12 @@ def bg_emit(msg):
 def listen():
     global ser
     if (ser):
-        while ser.inWaiting():
+        while True:
             read_serial=ser.readline()
-            print(trim(read_serial))
-
-            
+	    print("printing: ")
+            print(read_serial.strip())            
             # bg_emit(read_serial)
+    print("done")
 
 @app.route("/")
 def index():
