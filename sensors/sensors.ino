@@ -8,6 +8,7 @@ float         f;
 int           chk;
 int           red_pin = 13;
 int           green_pin = 9;
+int           count = -1;
 unsigned long interval = 10000;
 unsigned long prev_millis = 0;
 
@@ -18,10 +19,8 @@ void setup() {
   // set up the LCD's number of columns and rows:
   Serial.begin(9600);
   lcd.begin(16, 2);
-  lcd.print("Welcome to...");
+  lcd.print("Initialized...");
   delay(2000);
-  lcd.setCursor(0, 0);
-  lcd.print("Project Green Light");
   pinMode(red_pin, OUTPUT);
   pinMode(green_pin, OUTPUT);
 }
