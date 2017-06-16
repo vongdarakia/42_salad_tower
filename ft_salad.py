@@ -1,20 +1,21 @@
-import time
 import threading
 import eventlet
 import serial
 import subprocess
 import csv
+import datetime
 
 eventlet.monkey_patch()
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_socketio import SocketIO, send, emit
+from time import time, gmtime, strftime
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 num = 0
-fieldnames = ['temperature', 'temperature_time', 'humidity', 'humidity_time']
-data_file = "data.csv"
+fieldnames = ['temperature', 'humidity', 'time']
+data_file = "sensor_data.csv"
 data = []
 
 def bg_emit(msg):
@@ -24,13 +25,41 @@ def bg_emit(msg):
 
 def listen():
     global ser
-    if (ser):
+    tmp = 0
+    hum = 0
+    time_taken = 0
+
+    if ser:
         while True:
-            read_serial=ser.readline()
-	    print("printing: ")
-            print(read_serial.strip())            
-            # bg_emit(read_serial)
-    print("done")
+            read_serial = ser.readline()
+            print("printing: ")
+            read_serial = read_serial.strip()
+            split = read_serial.split(',');
+
+            if len(split) != 2:
+                continue
+
+            if 'Humidity' in split[0]:
+                hum_data = split[0].split(' ');
+                if (len(hum_data) == 2):
+                    hum = hum_data[1]
+                else:
+                    continue
+            else:
+                continue
+
+            if 'Temperature' in split[1]:
+                tmp_data = split[1].split(' ');
+                if (len(tmp_data) == 2):
+                    tmp = tmp_data[1]
+                else:
+                    continue
+            else:
+                continue
+
+            time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+            appendDataCSV(data_file, makeData(hum, tmp, time_taken));         
+    print("listening over")
 
 @app.route("/")
 def index():
@@ -41,9 +70,14 @@ def getMember(name):
     return render_template(
         'test.html',name=name)
 
+@app.route("/sensor_data")
+def getSensorData():
+    global data
+    return jsonify(data[-43200:])
+
 def createDataCSV(filename):
     with open(filename, 'w') as csvfile:
-        fieldnames = ['temperature', 'temperature_time', 'humidity', 'humidity_time']
+        fieldnames = ['temperature', 'humidity', 'time']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -52,12 +86,11 @@ def appendDataCSV(filename, data):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(data)
 
-def makeData(temperature, temperature_time, humidity, humidity_time):
+def makeData(humidity, temperature, time):
     return {
         'temperature': temperature,
-        'temperature_time': temperature_time,
         'humidity': humidity,
-        'humidity_time': humidity_time
+        'time': time
     }
 
 dev = False
@@ -84,6 +117,7 @@ if __name__ == "__main__":
 
     if (row_count == 0):
         createDataCSV(data_file)
+
     # print makeData(1, 1, 2, 2)
     # appendDataCSV(data_file, {'temperature': 1, 'temperature_time': 1, 'humidity': 2, 'humidity_time': 2});
         # print(data)
