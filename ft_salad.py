@@ -29,7 +29,7 @@ def bg_emit(msg):
     socketio.emit('my response', num)
 
 def listen():
-    global ser
+    global ser, data_file
     tmp = 0
     hum = 0
     time_taken = 0
