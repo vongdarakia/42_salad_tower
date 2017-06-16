@@ -15,8 +15,8 @@ from time import time, gmtime, strftime
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-num = 0
 fieldnames = ['temperature', 'humidity', 'time']
+data = []
 data_file = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
     "sensor_data.csv"
@@ -27,12 +27,7 @@ output_logs = os.path.join(
     "output.logs"
 )
 
-data = []
-
-def bg_emit(msg):
-    global num, socketio
-    num = num + 1
-    socketio.emit('my response', num)
+sys.stdout = open(output_logs, 'w+')
 
 def listen():
     global ser, data_file
@@ -73,11 +68,6 @@ def listen():
 @app.route("/")
 def index():
     return render_template('index.html')
- 
-#@app.route("/members/<string:name>/")
-#def getMember(name):
-#    return render_template(
-#        'test.html',name=name)
 
 @app.route("/sensor_data")
 def getSensorData():
@@ -104,6 +94,7 @@ def makeData(humidity, temperature, time):
 
 dev = False
 ser = False
+
 try:
     dev = subprocess.check_output('ls /dev/ttyACM*', shell=True)
     ser = serial.Serial(dev.strip(), 9600)
@@ -114,7 +105,6 @@ eventlet.spawn(listen)
 
 if __name__ == "__main__":
     try:
-        sys.stdout = open(output_logs, 'w+')
         with open(data_file) as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
@@ -128,8 +118,4 @@ if __name__ == "__main__":
     if (row_count == 0):
         createDataCSV(data_file)
 
-    appendDataCSV(data_file, makeData(1, 1, 1));
-    # print makeData(1, 1, 2, 2)
-    # appendDataCSV(data_file, {'temperature': 1, 'temperature_time': 1, 'humidity': 2, 'humidity_time': 2});
-        # print(data)
     socketio.run(app, debug=False)
