@@ -12,8 +12,6 @@ from flask_socketio import SocketIO, send, emit
 app = Flask(__name__)
 socketio = SocketIO(app)
 num = 0
-dev = subprocess.check_output('ls /dev/ttyACM*', shell=True)
-ser = serial.Serial(dev.strip(), 9600)
 
 def bg_emit(msg):
     global num, socketio
@@ -22,10 +20,11 @@ def bg_emit(msg):
 
 def listen():
     global ser
-    while ser.inWaiting():
-        read_serial=ser.readline()
-        print(read_serial)
-        bg_emit(read_serial)
+    if (ser):
+        while ser.inWaiting():
+            read_serial=ser.readline()
+            print(read_serial)
+            bg_emit(read_serial)
 
 @app.route("/")
 def index():
@@ -53,6 +52,18 @@ def handle_message(message):
 def handle_my_custom_event(json):
     print('received json: ' + str(json))
     socketio.emit('my response', {'data': 'got it!'})
+
+dev = False
+ser = False
+try:
+    dev = subprocess.check_output('ls /dev/ttyACM*', shell=True)
+except:
+    print("shit")
+else :
+    print("idk")
+
+if (dev):
+    ser = serial.Serial(dev.strip(), 9600)
 
 eventlet.spawn(listen)
 
