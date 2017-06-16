@@ -103,7 +103,7 @@ def dataPi():
 
             time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
             break
-    return jsonify(makeData(hum, tmp, time_taken))
+    return return_template('data.html', makeData(hum, tmp, time_taken));
 
 @app.route("/sensor_data")
 def getSensorData():
