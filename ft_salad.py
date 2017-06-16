@@ -75,6 +75,10 @@ def about():
 
 @app.route("/data")
 def dataPi():
+    tmp = 0
+    hum = 0
+    time_taken = 0
+    
     if ser:
         while True:
             read_serial = ser.readline()
