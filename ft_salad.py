@@ -2,6 +2,7 @@ import threading
 import eventlet
 import serial
 import subprocess
+import os
 import csv
 import datetime
 
@@ -15,7 +16,11 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 num = 0
 fieldnames = ['temperature', 'humidity', 'time']
-data_file = "sensor_data.csv"
+data_file = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    "sensor_data.csv"
+)
+print data_file
 data = []
 
 def bg_emit(msg):
