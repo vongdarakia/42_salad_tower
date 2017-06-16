@@ -5,6 +5,7 @@ import subprocess
 import os
 import csv
 import datetime
+import sys
 
 eventlet.monkey_patch()
 
@@ -19,6 +20,11 @@ fieldnames = ['temperature', 'humidity', 'time']
 data_file = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
     "sensor_data.csv"
+)
+
+output_logs = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    "output.logs"
 )
 
 data = []
@@ -42,24 +48,21 @@ def listen():
             split = read_serial.split(',');
 
             if len(split) != 2:
-                print(len(split))
                 continue
 
             if 'Humidity' in split[0]:
                 hum_data = split[0].split(' ');
-                if (len(hum_data) == 2):
-                    hum = hum_data[1]
-                else:
+                if (len(hum_data) != 2):
                     continue
+                hum = hum_data[1]
             else:
                 continue
 
             if 'Temperature' in split[1]:
                 tmp_data = split[1].split(' ');
                 if (len(tmp_data) == 2):
-                    tmp = tmp_data[1]
-                else:
                     continue
+                tmp = tmp_data[1]
             else:
                 continue
 
@@ -111,6 +114,7 @@ eventlet.spawn(listen)
 
 if __name__ == "__main__":
     try:
+        sys.stdout = open(output_logs, 'w+')
         with open(data_file) as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
