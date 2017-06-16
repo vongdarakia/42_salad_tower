@@ -32,11 +32,12 @@ def listen():
     if ser:
         while True:
             read_serial = ser.readline()
-            print("printing: ")
+            print(read_serial)
             read_serial = read_serial.strip()
             split = read_serial.split(',');
 
             if len(split) != 2:
+                print(len(split))
                 continue
 
             if 'Humidity' in split[0]:
