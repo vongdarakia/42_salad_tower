@@ -47,6 +47,7 @@ def listen():
                 else:
                     continue
             else:
+		print('no humidity')
                 continue
 
             if 'Temperature' in split[1]:
@@ -56,6 +57,7 @@ def listen():
                 else:
                     continue
             else:
+		print('no temp')
                 continue
 
             time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
@@ -66,10 +68,10 @@ def listen():
 def index():
     return render_template('index.html')
  
-@app.route("/members/<string:name>/")
-def getMember(name):
-    return render_template(
-        'test.html',name=name)
+#@app.route("/members/<string:name>/")
+#def getMember(name):
+#    return render_template(
+#        'test.html',name=name)
 
 @app.route("/sensor_data")
 def getSensorData():
