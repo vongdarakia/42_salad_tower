@@ -74,11 +74,11 @@ def about():
     return render_template('about.html')
 
 @app.route("/data")
-def dataPi():
+
+def dataPi(sensorData=None):
     tmp = 0
     hum = 0
     time_taken = 0
-    
     if ser:
         while True:
             read_serial = ser.readline()
@@ -107,7 +107,8 @@ def dataPi():
 
             time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
             break
-    return return_template('data.html', makeData(hum, tmp, time_taken));
+    sensorData=makeData(hum, tmp, time_taken)
+    return render_template('data.html', humidity=hum, temperature=tmp, time_take=time_taken)
 
 @app.route("/sensor_data")
 def getSensorData():
@@ -158,4 +159,4 @@ if __name__ == "__main__":
     if (row_count == 0):
         createDataCSV(data_file)
 
-    socketio.run(app, debug=False)
+    socketio.run(app, debug=True)
