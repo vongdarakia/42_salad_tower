@@ -20,7 +20,7 @@ data_file = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
     "sensor_data.csv"
 )
-print data_file
+
 data = []
 
 def bg_emit(msg):
@@ -64,7 +64,7 @@ def listen():
                 continue
 
             time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-            appendDataCSV(data_file, makeData(hum, tmp, time_taken));         
+            appendDataCSV(data_file, makeData(hum, tmp, time_taken));
     print("listening over")
 
 @app.route("/")
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     if (row_count == 0):
         createDataCSV(data_file)
 
-    appendDataCSV(data_file, makeData(1, 1, 1));  
+    appendDataCSV(data_file, makeData(1, 1, 1));
     # print makeData(1, 1, 2, 2)
     # appendDataCSV(data_file, {'temperature': 1, 'temperature_time': 1, 'humidity': 2, 'humidity_time': 2});
         # print(data)
