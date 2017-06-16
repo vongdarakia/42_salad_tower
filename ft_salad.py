@@ -108,7 +108,7 @@ def dataPi(sensorData=None):
             time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
             break
     sensorData=makeData(hum, tmp, time_taken)
-    return render_template('data.html', humidity=hum, temperature=tmp, time_take=time_taken)
+    return render_template('data.html', humidity=hum, temperature=tmp, time_taken=time_taken)
 
 @app.route("/sensor_data")
 def getSensorData():
