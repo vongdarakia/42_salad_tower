@@ -6,14 +6,15 @@ char          buff[32];
 char          str_temp[8];
 float         f;
 int           chk;
-int           red_pin = 13;
-int           green_pin = 9;
+int           red_pin = 22;
+int           green_pin = 24;
+int           blue_pin = 26;
 int           count = -1;
 unsigned long interval = 10000;
 unsigned long prev_millis = 0;
 
 // initialize the library with the numbers of the interface pins
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(13, 12, 11, 10, 9, 8);
 
 void setup() {
   // set up the LCD's number of columns and rows:
@@ -23,6 +24,7 @@ void setup() {
   delay(2000);
   pinMode(red_pin, OUTPUT);
   pinMode(green_pin, OUTPUT);
+  pinMode(blue_pin, OUTPUT);
 }
 
 void loop() {
@@ -54,15 +56,26 @@ void loop() {
   lcd.print("Temperature: ");
   lcd.print((int)(DHT.temperature * 9.0/5.0 + 32.0));
   lcd.print("F");
+//  int  r = 255;
+//  int  b = 0;
+//  while (r-- > 0)
+//  {
+//    analogWrite(red_pin, r);
+//    analogWrite(blue_pin, b);
+//    analogWrite(green_pin, b);
+//    b++;
+//  }
   if (DHT.humidity >= 71 || DHT.humidity <= 49)
   {
     analogWrite(red_pin, 255);
     analogWrite(green_pin, 0);
+    analogWrite(blue_pin, 0);
   }
   else
   {
-    analogWrite(red_pin, 0);
+    analogWrite(red_pin, 255);
     analogWrite(green_pin, 255);
+    analogWrite(blue_pin, 255);
   }
 //  delay(10000);
   Serial.print("Humidity: ");

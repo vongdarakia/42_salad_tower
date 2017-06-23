@@ -37,32 +37,35 @@ def listen():
 
     if ser:
         while True:
-            read_serial = ser.readline()
-            print(read_serial)
-            read_serial = read_serial.strip()
-            split = read_serial.split(',');
+            try:
+                read_serial = ser.readline()
+                print(read_serial)
+                read_serial = read_serial.strip()
+                split = read_serial.split(',');
 
-            if len(split) != 2:
-                continue
-
-            if 'Humidity' in split[0]:
-                hum_data = split[0].split(' ');
-                if (len(hum_data) != 2):
+                if len(split) != 2:
                     continue
-                hum = hum_data[1]
-            else:
-                continue
 
-            if 'Temperature' in split[1]:
-                tmp_data = split[1].split(' ');
-                if (len(tmp_data) != 2):
+                if 'Humidity' in split[0]:
+                    hum_data = split[0].split(' ');
+                    if (len(hum_data) != 2):
+                        continue
+                    hum = hum_data[1]
+                else:
                     continue
-                tmp = tmp_data[1]
-            else:
-                continue
 
-            time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-            appendDataCSV(data_file, makeData(hum, tmp, time_taken));
+                if 'Temperature' in split[1]:
+                    tmp_data = split[1].split(' ');
+                    if (len(tmp_data) != 2):
+                        continue
+                    tmp = tmp_data[1]
+                else:
+                    continue
+
+                time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+                appendDataCSV(data_file, makeData(hum, tmp, time_taken));
+            except:
+                continue
     print("listening over")
 
 @app.route("/")
