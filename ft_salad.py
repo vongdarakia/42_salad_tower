@@ -27,7 +27,7 @@ output_logs = os.path.join(
     "output.logs"
 )
 
-sys.stdout = open(output_logs, 'w+')
+# sys.stdout = open(output_logs, 'w+')
 
 def listen():
     global ser, data_file
@@ -37,7 +37,6 @@ def listen():
 
     if ser:
         while True:
-            try:
                 read_serial = ser.readline()
                 print(read_serial)
                 read_serial = read_serial.strip()
@@ -64,8 +63,6 @@ def listen():
 
                 time_taken = strftime("%Y-%m-%d %H:%M:%S", gmtime())
                 appendDataCSV(data_file, makeData(hum, tmp, time_taken));
-            except:
-                continue
     print("listening over")
 
 @app.route("/")
@@ -77,7 +74,6 @@ def about():
     return render_template('about.html')
 
 @app.route("/data")
-
 def dataPi(sensorData=None):
     tmp = 0
     hum = 0
@@ -138,7 +134,6 @@ def makeData(humidity, temperature, time):
 
 dev = False
 ser = False
-
 try:
     dev = subprocess.check_output('ls /dev/ttyACM*', shell=True)
     ser = serial.Serial(dev.strip(), 9600)
@@ -161,5 +156,5 @@ if __name__ == "__main__":
 
     if (row_count == 0):
         createDataCSV(data_file)
-
-    socketio.run(app, debug=True)
+    app.run(debug=True)
+    #socketio.run(app, debug=True)
