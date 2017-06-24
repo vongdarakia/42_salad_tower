@@ -1,3 +1,4 @@
+import plotly
 import plotly.plotly as py
 import plotly.graph_objs as go
 
@@ -31,4 +32,4 @@ trace2 = go.Scatter(
 )
 
 data = [trace0, trace1, trace2]
-py.offline.plot(data, filename='scatter-mode')
+plotly.offline.plot(data, filename='scatter-mode.html')
