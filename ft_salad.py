@@ -140,7 +140,7 @@ dev = False
 ser = False
 
 try:
-    dev = subprocess.check_output('ls /dev/ttyACM1', shell=True)
+    dev = subprocess.check_output('ls /dev/ttyACM*', shell=True)
     ser = serial.Serial(dev.strip(), 9600)
 except:
     print("Couldn't find any devices.")
