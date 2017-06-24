@@ -19,13 +19,13 @@ trace0 = go.Scatter(
     name = 'markers'
 )
 trace1 = go.Scatter(
-    x = 10,
+    x = 5,
     y = 10,
     mode = 'lines+markers',
     name = 'lines+markers'
 )
 trace2 = go.Scatter(
-    x = 20,
+    x = 5,
     y = 5,
     mode = 'lines',
     name = 'lines'
