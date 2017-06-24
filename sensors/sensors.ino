@@ -56,15 +56,6 @@ void loop() {
   lcd.print("Temperature: ");
   lcd.print((int)(DHT.temperature * 9.0/5.0 + 32.0));
   lcd.print("F");
-//  int  r = 255;
-//  int  b = 0;
-//  while (r-- > 0)
-//  {
-//    analogWrite(red_pin, r);
-//    analogWrite(blue_pin, b);
-//    analogWrite(green_pin, b);
-//    b++;
-//  }
   if (DHT.humidity >= 71 || DHT.humidity <= 49)
   {
     analogWrite(red_pin, 255);
