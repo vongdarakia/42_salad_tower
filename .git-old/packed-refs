@@ -1,0 +1,4 @@
+# pack-refs with: peeled fully-peeled 
+252514d3c2f413078b513fa56245b51658672266 refs/remotes/origin/avongdar
+6da8a0921d7daa51d8b4a6811e6674a39a37b016 refs/remotes/origin/master
+0d42b5bb9e6d98d04ce07806c78cdc26951abc02 refs/remotes/origin/new_branch

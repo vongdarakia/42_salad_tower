@@ -1,0 +1,18 @@
+0000000000000000000000000000000000000000 6da8a0921d7daa51d8b4a6811e6674a39a37b016 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1497602918 -0400	clone: from https://github.com/vongdarakia/ft_salad_tower.git
+6da8a0921d7daa51d8b4a6811e6674a39a37b016 8a378165a58f73b4bad534ab49bcea49c0ebb3d1 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1497605888 -0400	pull: Fast-forward
+8a378165a58f73b4bad534ab49bcea49c0ebb3d1 91c22fa88b9d1a333ade21d70c18969bcaca78db Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1497607745 -0400	commit: Added more features to Arduino software. LCD functionality, led conditionals
+91c22fa88b9d1a333ade21d70c18969bcaca78db aa34b7b66c290884c73d044b96dbc2cee3e2f3c8 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1497612376 -0400	commit: minor changes to LCD
+aa34b7b66c290884c73d044b96dbc2cee3e2f3c8 7ec23cf226a85a295eea778fcfc7bf5336555f66 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1497612381 -0400	pull: Merge made by the 'recursive' strategy.
+7ec23cf226a85a295eea778fcfc7bf5336555f66 b16d525e6cc3a6782e3c9547eaa6e1168b4482a4 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498099702 -0400	pull: Fast-forward
+b16d525e6cc3a6782e3c9547eaa6e1168b4482a4 23321a0b7d12a1748307b599b4302b8df205de18 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498262282 -0400	commit: Lights programmed, changes to server
+23321a0b7d12a1748307b599b4302b8df205de18 597d9cc3db2051152dbb37407ab51dc0db369037 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498262661 -0400	commit: Changes to port
+597d9cc3db2051152dbb37407ab51dc0db369037 3d9f717ad669ac6843da44937d6293ce8e0bf357 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498262778 -0400	commit: More port tests
+3d9f717ad669ac6843da44937d6293ce8e0bf357 84d06501798f6b1690f24a12153e99ca68074f10 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498274610 -0400	commit: added sub process to seria test
+84d06501798f6b1690f24a12153e99ca68074f10 9a0c22c8569c8c1f11e5c267dd5f763437c1e2d5 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498274869 -0400	pull: Fast-forward
+9a0c22c8569c8c1f11e5c267dd5f763437c1e2d5 e4cd3ef5b4fa64e42108a1c1a9a7905e36624657 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498280421 -0400	pull: Fast-forward
+e4cd3ef5b4fa64e42108a1c1a9a7905e36624657 07d0c735fc45b2b039851a68a675407cf484520e Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498280821 -0400	pull: Fast-forward
+07d0c735fc45b2b039851a68a675407cf484520e eb5667e27f6e7a37a8af2a5dbb455b760b61be6d Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498281636 -0400	pull: Fast-forward
+eb5667e27f6e7a37a8af2a5dbb455b760b61be6d e9150f9179e70b9c5ba0dfe35f4125b7cdca2514 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498281843 -0400	pull: Fast-forward
+e9150f9179e70b9c5ba0dfe35f4125b7cdca2514 7239da8212641591877703366d46c7aca113a1bc Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498428398 -0400	pull: Fast-forward
+7239da8212641591877703366d46c7aca113a1bc 63e9a11363c1495a80c85dba58944737f81d2f6a Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498460779 -0400	commit: Incorporated graph feature
+63e9a11363c1495a80c85dba58944737f81d2f6a a7bac0786132a1c11f1325813e8e7a6d46754680 Michael Morel <Aegis@Michaels-MacBook-Pro-2.local> 1498465593 -0400	commit: testing for hrlyavg
