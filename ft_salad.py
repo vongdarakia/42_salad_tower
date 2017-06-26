@@ -6,6 +6,9 @@ import os
 import csv
 import sys
 import sqlite3
+import plotly
+import plotly.plotly as py
+import plotly.graph_objs as go
 
 eventlet.monkey_patch()
 
@@ -156,9 +159,51 @@ def dataPi():
     return render_template('data.html', humidity=hum, temperature=tmp, time_taken=time_taken)
 
 @app.route("/sensor_data")
-def getSensorData():
-    global data
-    return jsonify(data[-43200:])
+def populateGraph():
+    conn = sqlite3.connect("sensor_data.db")
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+    c.execute("select humidity from humidity where strftime('%d', time) > '25' and strftime('%d', time) < '31'")
+    r = c.fetchall()
+    hum = []
+    for member in r:
+        hum.append(member[0])
+    c.execute("select strftime('%m-%d %H:%M', time) from humidity where strftime('%d', time) > '25' and strftime('%d', time) < '31'")
+    r = c.fetchall()
+    time = []
+    for member in r:
+        time.append(member[0])
+    # c.execute("select temperature from temperature where strftime('%d', time) > '22' and strftime('%d', time) < '31'")
+    # r = c.fetchall()
+    # temp = []
+    # for member in r:
+    #     temp.append(member[0])
+    c.close()
+    trace_high = go.Scatter(
+                    x=time,
+                    y=hum,
+                    name = "AAPL High",
+                    line = dict(color = '#17BECF'),
+                    opacity = 0.8)
+
+    # trace_low = go.Scatter(
+    #                 x=time,
+    #                 y=temp,
+    #                 name = "AAPL Low",
+    #                 line = dict(color = '#7F7F7F'),
+    #                 opacity = 0.8)
+
+    data = [trace_high]
+
+    layout = dict(
+        title = "Humidity History",
+        xaxis = dict(
+            range = ['2017-06-23','2017-06-30'])
+    )
+
+    fig = dict(data=data, layout=layout)
+    plotly.offline.plot(fig, filename = "humidity_graph.html")
+    return render_template('humidity_graph.html')
 
 def createDataCSV(filename):
     with open(filename, 'w+') as csvfile:

@@ -13,23 +13,28 @@ random_y2 = np.random.randn(N)-5
 
 # Create traces
 trace0 = go.Scatter(
-    x = 5,
-    y = 20,
+    x = random_x,
+    y = random_y0,
     mode = 'markers',
     name = 'markers'
 )
 trace1 = go.Scatter(
-    x = 5,
-    y = 10,
+    x = random_x,
+    y = random_y1,
     mode = 'lines+markers',
     name = 'lines+markers'
 )
 trace2 = go.Scatter(
-    x = 5,
-    y = 5,
+    x = random_x,
+    y = random_y2,
     mode = 'lines',
     name = 'lines'
 )
 
 data = [trace0, trace1, trace2]
+print (random_x)
+print (random_y0)
+print (random_y1)
+print (random_y2)
+
 plotly.offline.plot(data, filename='scatter-mode.html')
